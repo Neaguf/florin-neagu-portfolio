@@ -124,6 +124,40 @@ export default function Home() {
           </span>
         </div>
       </section>
+      <section className="pricing-section" id="pricing">
+        <div className="container">
+          <Reveal>
+            <p className="pixel-label">{t.pricing.eyebrow}</p>
+            <h2>
+              {t.pricing.titleLine1}
+              <br />
+              <em>{t.pricing.titleEm}</em>
+            </h2>
+          </Reveal>
+          <div className="pricing-grid">
+            {t.pricing.packages.map((pkg, index) => (
+              <Reveal key={pkg.title} delay={index * 0.08} className="pricing-card">
+                <div className="pricing-header">
+                  <h3>{pkg.title}</h3>
+                  <div className="pricing-price">{pkg.price}</div>
+                  <p className="pricing-description">{pkg.description}</p>
+                </div>
+                <ul className="pricing-features">
+                  {pkg.features.map((feature) => (
+                    <li key={feature}>
+                      <Check size={16} />
+                      <span>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+                <a href="#contact" className="game-button pricing-cta">
+                  {t.hero.ctaPrimary}
+                </a>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
       <ProjectSelector />
       <section className="story-section" id="story">
         <div className="container story-layout">
@@ -215,40 +249,6 @@ export default function Home() {
                 </Reveal>
               );
             })}
-          </div>
-        </div>
-      </section>
-      <section className="pricing-section" id="pricing">
-        <div className="container">
-          <Reveal>
-            <p className="pixel-label">{t.pricing.eyebrow}</p>
-            <h2>
-              {t.pricing.titleLine1}
-              <br />
-              <em>{t.pricing.titleEm}</em>
-            </h2>
-          </Reveal>
-          <div className="pricing-grid">
-            {t.pricing.packages.map((pkg, index) => (
-              <Reveal key={pkg.title} delay={index * 0.08} className="pricing-card">
-                <div className="pricing-header">
-                  <h3>{pkg.title}</h3>
-                  <div className="pricing-price">{pkg.price}</div>
-                  <p className="pricing-description">{pkg.description}</p>
-                </div>
-                <ul className="pricing-features">
-                  {pkg.features.map((feature) => (
-                    <li key={feature}>
-                      <Check size={16} />
-                      <span>{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-                <a href="#contact" className="game-button pricing-cta">
-                  {t.hero.ctaPrimary}
-                </a>
-              </Reveal>
-            ))}
           </div>
         </div>
       </section>

@@ -3,6 +3,36 @@ import { z } from "zod";
 
 const blockedNamePattern = /^(test|dummy|guest|user|sample|example|anonim|nume|name)$/i;
 
+const isValidInternationalPhone = (value: string) => {
+  const normalized = value.replace(/\s+/g, "").replace(/-/g, "");
+
+  const localRoMatch = normalized.match(/^0\d{9,10}$/);
+  if (localRoMatch) {
+    return true;
+  }
+
+  const internationalMatch = normalized.match(/^(\+44|\+40|\+34)(\d+)$/);
+  if (!internationalMatch) {
+    return false;
+  }
+
+  const [, prefix, digits] = internationalMatch;
+
+  if (prefix === "+44") {
+    return digits.length >= 9 && digits.length <= 11;
+  }
+
+  if (prefix === "+40") {
+    return digits.length >= 9 && digits.length <= 10;
+  }
+
+  if (prefix === "+34") {
+    return digits.length === 9;
+  }
+
+  return false;
+};
+
 const contactSchema = z.object({
   name: z
     .string()
@@ -21,10 +51,7 @@ const contactSchema = z.object({
   phone: z
     .string()
     .trim()
-    .refine((value) => {
-      const digits = value.replace(/\D/g, "");
-      return digits.length >= 7 && digits.length <= 15 && !/^0+$/.test(digits) && !/^1{7,}$/.test(digits);
-    }, "Please provide a valid phone number."),
+    .refine((value) => isValidInternationalPhone(value), "Please provide a valid phone number starting with +44, +40 or +34."),
   message: z
     .string()
     .trim()
@@ -36,37 +63,14 @@ const contactSchema = z.object({
       return letters >= 10 && !/^(lorem|ipsum|test|asdf|qwerty|dummy|bla|hello|hi|hey)$/i.test(cleaned);
     }, "Please provide a meaningful project description."),
   website: z.string().trim().max(0).optional().or(z.literal("")),
-  captchaToken: z.string().optional(),
 });
 
 export async function POST(request: Request) {
   try {
     const data = contactSchema.parse(await request.json());
-    const hasRecaptcha = Boolean(process.env.RECAPTCHA_SECRET_KEY && process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY);
 
     if (data.website && data.website.length > 0) {
       return NextResponse.json({ error: "Spam check failed." }, { status: 400 });
-    }
-
-    if (hasRecaptcha && !data.captchaToken) {
-      return NextResponse.json({ error: "Please complete the security check." }, { status: 400 });
-    }
-
-    if (hasRecaptcha && data.captchaToken) {
-      const verificationResponse = await fetch("https://www.google.com/recaptcha/api/siteverify", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: new URLSearchParams({
-          secret: process.env.RECAPTCHA_SECRET_KEY ?? "",
-          response: data.captchaToken,
-        }).toString(),
-      });
-
-      const verificationData = await verificationResponse.json();
-      if (!verificationData.success) {
-        console.error("reCAPTCHA verification failed:", verificationData);
-        return NextResponse.json({ error: "Security verification failed." }, { status: 400 });
-      }
     }
 
     const requiredEnv = ["RESEND_API_KEY", "RESEND_FROM_EMAIL", "CONTACT_EMAIL"] as const;

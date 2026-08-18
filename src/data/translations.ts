@@ -149,7 +149,7 @@ const ro: Dictionary = {
     scrollHint: "scroll pentru a explora",
   },
   story: {
-    eyebrow: "Nivel 1 · Profil dezvoltator",
+    eyebrow: "Senior Full-Stack Developer",
     titleLine1: "Cine e în spatele",
     titleEm: "ecranului?",
     summary:
@@ -415,7 +415,7 @@ const en: Dictionary = {
     scrollHint: "scroll to explore",
   },
   story: {
-    eyebrow: "Level 1 · Developer profile",
+    eyebrow: "Senior Full-Stack Developer",
     titleLine1: "Who's behind the",
     titleEm: "screen?",
     summary:

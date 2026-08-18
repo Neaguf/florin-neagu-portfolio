@@ -2,12 +2,42 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ArrowUpRight, Check } from "lucide-react";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { useLanguage } from "@/components/language-provider";
 
 const blockedNamePattern = /^(test|dummy|guest|user|sample|example|anonim|nume|name)$/i;
+
+const isValidInternationalPhone = (value: string) => {
+  const normalized = value.replace(/\s+/g, "").replace(/-/g, "");
+
+  const localRoMatch = normalized.match(/^0\d{9,10}$/);
+  if (localRoMatch) {
+    return true;
+  }
+
+  const internationalMatch = normalized.match(/^(\+44|\+40|\+34)(\d+)$/);
+  if (!internationalMatch) {
+    return false;
+  }
+
+  const [, prefix, digits] = internationalMatch;
+
+  if (prefix === "+44") {
+    return digits.length >= 9 && digits.length <= 11;
+  }
+
+  if (prefix === "+40") {
+    return digits.length >= 9 && digits.length <= 10;
+  }
+
+  if (prefix === "+34") {
+    return digits.length === 9;
+  }
+
+  return false;
+};
 
 type FormData = {
   name: string;
@@ -15,62 +45,12 @@ type FormData = {
   phone: string;
   message: string;
   website?: string;
-  captchaToken?: string;
 };
 
 export function ContactForm() {
   const { t } = useLanguage();
   const [sent, setSent] = useState(false);
   const [sendError, setSendError] = useState(false);
-  const [captchaToken, setCaptchaToken] = useState("");
-  const [captchaLoaded, setCaptchaLoaded] = useState(false);
-  const recaptchaRef = useRef<HTMLDivElement | null>(null);
-  const recaptchaSiteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
-  const hasRecaptcha = Boolean(recaptchaSiteKey);
-
-  useEffect(() => {
-    if (!hasRecaptcha || !recaptchaRef.current || typeof window === "undefined") {
-      setCaptchaLoaded(true);
-      return;
-    }
-
-    const scriptId = "google-recaptcha-script";
-    const existingScript = document.getElementById(scriptId) as HTMLScriptElement | null;
-    const grecaptcha = (window as Window & { grecaptcha?: { render?: (container: Element, params: Record<string, unknown>) => void } }).grecaptcha;
-
-    const renderCaptcha = () => {
-      if (!grecaptcha || !recaptchaRef.current) return;
-
-      grecaptcha.render?.(recaptchaRef.current, {
-        sitekey: recaptchaSiteKey,
-        callback: (token: string) => setCaptchaToken(token),
-        "expired-callback": () => setCaptchaToken(""),
-        "error-callback": () => setCaptchaToken(""),
-      });
-      setCaptchaLoaded(true);
-    };
-
-    if (existingScript) {
-      if (grecaptcha) {
-        renderCaptcha();
-      } else {
-        existingScript.addEventListener("load", renderCaptcha, { once: true });
-      }
-      return;
-    }
-
-    const script = document.createElement("script");
-    script.id = scriptId;
-    script.src = "https://www.google.com/recaptcha/api.js?render=explicit";
-    script.async = true;
-    script.defer = true;
-    script.onload = renderCaptcha;
-    document.body.appendChild(script);
-
-    return () => {
-      script.remove();
-    };
-  }, [recaptchaSiteKey]);
 
   const schema = useMemo(
     () =>
@@ -91,10 +71,7 @@ export function ContactForm() {
         phone: z
           .string()
           .trim()
-          .refine((value) => {
-            const digits = value.replace(/\D/g, "");
-            return digits.length >= 7 && digits.length <= 15 && !/^0+$/.test(digits) && !/^1{7,}$/.test(digits);
-          }, t.contactForm.errors.phone)
+          .refine((value) => isValidInternationalPhone(value), t.contactForm.errors.phone)
           .max(30, t.contactForm.errors.phone),
         message: z
           .string()
@@ -106,7 +83,6 @@ export function ContactForm() {
             return letters >= 10 && !/^(lorem|ipsum|test|asdf|qwerty|dummy|bla|hello|hi|hey)$/i.test(cleaned);
           }, t.contactForm.errors.message),
         website: z.string().optional(),
-        captchaToken: z.string().optional(),
       }),
     [t]
   );
@@ -114,11 +90,6 @@ export function ContactForm() {
   const { register, handleSubmit, formState: { errors, isSubmitting }, reset } = useForm<FormData>({ resolver: zodResolver(schema) });
 
   const onSubmit = async (data: FormData) => {
-    if (hasRecaptcha && !captchaToken) {
-      setSendError(true);
-      return;
-    }
-
     if (data.website) {
       setSendError(true);
       return;
@@ -130,10 +101,7 @@ export function ContactForm() {
     const response = await fetch("/api/contact", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        ...data,
-        captchaToken: hasRecaptcha ? captchaToken : undefined,
-      }),
+      body: JSON.stringify(data),
     });
 
     if (!response.ok) {
@@ -142,12 +110,7 @@ export function ContactForm() {
     }
 
     setSent(true);
-    setCaptchaToken("");
     reset();
-    if (typeof window !== "undefined") {
-      const grecaptcha = (window as Window & { grecaptcha?: { reset?: () => void } }).grecaptcha;
-      grecaptcha?.reset?.();
-    }
   };
 
   return (
@@ -174,14 +137,6 @@ export function ContactForm() {
         {errors.message && <em>{errors.message.message}</em>}
       </label>
 
-      {hasRecaptcha && (
-        <div className="full">
-          <div ref={recaptchaRef} />
-          {!captchaLoaded && <em>Loading security check…</em>}
-          {!captchaToken && captchaLoaded && <em>Complete the security check to continue.</em>}
-        </div>
-      )}
-
       <div className="form-footer">
         <p>
           {sent ? (
@@ -194,7 +149,7 @@ export function ContactForm() {
             t.contactForm.readyMessage
           )}
         </p>
-        <button className="button button-dark" type="submit" disabled={isSubmitting || (hasRecaptcha && !captchaLoaded)}>
+        <button className="button button-dark" type="submit" disabled={isSubmitting}>
           {isSubmitting ? t.contactForm.submitting : t.contactForm.submit}
           <ArrowUpRight size={17} />
         </button>
