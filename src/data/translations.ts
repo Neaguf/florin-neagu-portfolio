@@ -74,6 +74,8 @@ export interface Dictionary {
     namePlaceholder: string;
     emailLabel: string;
     emailPlaceholder: string;
+    phoneLabel: string;
+    phonePlaceholder: string;
     messageLabel: string;
     messagePlaceholder: string;
     sentMessage: string;
@@ -84,6 +86,7 @@ export interface Dictionary {
     errors: {
       name: string;
       email: string;
+      phone: string;
       message: string;
     };
   };
@@ -150,11 +153,11 @@ const ro: Dictionary = {
     titleLine1: "Cine e în spatele",
     titleEm: "ecranului?",
     summary:
-      "Full stack developer cu peste 4 ani de experiență în construirea de aplicații web și mobile moderne, scalabile și orientate spre utilizator.",
+      "Full-stack developer cu experiență în construirea de aplicații web și mobile moderne, scalabile și centrate pe utilizator.",
     paragraph2:
-      "Am lucrat și ca IT Project Manager, iar asta m-a învățat să privesc proiectele dincolo de ecran: oameni, priorități, termene și rezultatul final.",
+      "Experiența mea include atât dezvoltarea tehnică, cât și coordonarea proiectelor, ceea ce mă ajută să construiesc soluții eficiente din punct de vedere al businessului, al utilizatorului și al echipei.",
     paragraph3:
-      "Lucrez atent, comunic des și păstrez lucrurile clare de la prima conversație până la lansare.",
+      "Mă concentrez pe claritate, colaborare și livrare de produse de calitate, de la prima idee până la lansare.",
     quoteLead: "Un singur partener.",
     quoteMiddle: "Tot ce ai nevoie. Fără scurtături. Fără compromisuri.",
     quoteHighlight: "Doar rezultate.",
@@ -278,16 +281,19 @@ const ro: Dictionary = {
     namePlaceholder: "Numele tău",
     emailLabel: "Email",
     emailPlaceholder: "tu@companie.ro",
+    phoneLabel: "Telefon",
+    phonePlaceholder: "+40 712 345 678",
     messageLabel: "Spune-mi despre proiect",
     messagePlaceholder: "Ce vrei să construiești sau să îmbunătățești?",
     sentMessage: "Mulțumesc — mesajul este pregătit pentru trimitere.",
     sendError: "Mesajul nu a putut fi trimis. Încearcă din nou.",
-    readyMessage: "Formular pregătit pentru conectare la email sau API.",
+    readyMessage: "",
     submitting: "Se trimite…",
     submit: "Trimite mesajul",
     errors: {
       name: "Te rog să introduci numele.",
       email: "Te rog să introduci o adresă de email validă.",
+      phone: "Te rog să introduci un număr de telefon valid.",
       message: "Spune-mi puțin mai multe despre proiect.",
     },
   },
@@ -334,7 +340,7 @@ const ro: Dictionary = {
   },
   pricing: {
     eyebrow: "Pachete și prețuri",
-    titleLine1: "Site-uri profesiionale",
+    titleLine1: "Site-uri profesionale",
     titleEm: "personalizate pentru tine, de la 2.000 de lei.",
     packages: [
       {
@@ -537,16 +543,19 @@ const en: Dictionary = {
     namePlaceholder: "Your name",
     emailLabel: "Email",
     emailPlaceholder: "you@company.com",
+    phoneLabel: "Phone",
+    phonePlaceholder: "+1 555 123 4567",
     messageLabel: "Tell me about the project",
     messagePlaceholder: "What do you want to build or improve?",
     sentMessage: "Thanks — your message is ready to be sent.",
     sendError: "The message could not be sent. Please try again.",
-    readyMessage: "Form ready to be connected to email or an API.",
+    readyMessage: "",
     submitting: "Sending…",
     submit: "Send message",
     errors: {
       name: "Please enter your name.",
       email: "Please enter a valid email address.",
+      phone: "Please enter a valid phone number.",
       message: "Tell me a bit more about the project.",
     },
   },
@@ -798,16 +807,19 @@ const fr: Dictionary = {
     namePlaceholder: "Votre nom",
     emailLabel: "Email",
     emailPlaceholder: "toi@entreprise.com",
+    phoneLabel: "Téléphone",
+    phonePlaceholder: "+33 6 12 34 56 78",
     messageLabel: "Parlez-moi du projet",
     messagePlaceholder: "Que voulez-vous construire ou améliorer ?",
     sentMessage: "Merci — votre message est prêt à être envoyé.",
     sendError: "Le message n'a pas pu être envoyé. Réessayez.",
-    readyMessage: "Formulaire prêt à être connecté à un email ou une API.",
+    readyMessage: "",
     submitting: "Envoi en cours…",
     submit: "Envoyer le message",
     errors: {
       name: "Veuillez saisir votre nom.",
       email: "Veuillez saisir une adresse email valide.",
+      phone: "Veuillez saisir un numéro de téléphone valide.",
       message: "Dites-m'en un peu plus sur le projet.",
     },
   },
@@ -1057,16 +1069,19 @@ const de: Dictionary = {
     namePlaceholder: "Dein Name",
     emailLabel: "Email",
     emailPlaceholder: "du@firma.de",
+    phoneLabel: "Telefon",
+    phonePlaceholder: "+49 170 1234567",
     messageLabel: "Erzähl mir von deinem Projekt",
     messagePlaceholder: "Was möchtest du bauen oder verbessern?",
     sentMessage: "Danke — deine Nachricht ist bereit zum Versenden.",
     sendError: "Die Nachricht konnte nicht gesendet werden. Bitte versuche es erneut.",
-    readyMessage: "Formular bereit zur Anbindung an E-Mail oder eine API.",
+    readyMessage: "",
     submitting: "Wird gesendet…",
     submit: "Nachricht senden",
     errors: {
       name: "Bitte gib deinen Namen ein.",
       email: "Bitte gib eine gültige E-Mail-Adresse ein.",
+      phone: "Bitte gib eine gültige Telefonnummer ein.",
       message: "Erzähl mir etwas mehr über das Projekt.",
     },
   },
@@ -1313,16 +1328,19 @@ const es: Dictionary = {
     namePlaceholder: "Tu nombre",
     emailLabel: "Email",
     emailPlaceholder: "tu@empresa.com",
+    phoneLabel: "Teléfono",
+    phonePlaceholder: "+34 612 345 678",
     messageLabel: "Cuéntame sobre el proyecto",
     messagePlaceholder: "¿Qué quieres construir o mejorar?",
     sentMessage: "Gracias — tu mensaje está listo para enviarse.",
     sendError: "No se pudo enviar el mensaje. Inténtalo de nuevo.",
-    readyMessage: "Formulario listo para conectarse a un email o una API.",
+    readyMessage: "",
     submitting: "Enviando…",
     submit: "Enviar mensaje",
     errors: {
       name: "Por favor, introduce tu nombre.",
       email: "Por favor, introduce una dirección de correo válida.",
+      phone: "Por favor, introduce un número de teléfono válido.",
       message: "Cuéntame un poco más sobre el proyecto.",
     },
   },
@@ -1568,16 +1586,19 @@ const it: Dictionary = {
     namePlaceholder: "Il tuo nome",
     emailLabel: "Email",
     emailPlaceholder: "tu@azienda.it",
+    phoneLabel: "Telefono",
+    phonePlaceholder: "+39 333 1234567",
     messageLabel: "Raccontami del progetto",
     messagePlaceholder: "Cosa vuoi costruire o migliorare?",
     sentMessage: "Grazie — il tuo messaggio è pronto per essere inviato.",
     sendError: "Il messaggio non è stato inviato. Riprova.",
-    readyMessage: "Modulo pronto per essere collegato a un'email o a un'API.",
+    readyMessage: "",
     submitting: "Invio in corso…",
     submit: "Invia messaggio",
     errors: {
       name: "Inserisci il tuo nome.",
       email: "Inserisci un indirizzo email valido.",
+      phone: "Inserisci un numero di telefono valido.",
       message: "Dimmi qualcosa in più sul progetto.",
     },
   },
