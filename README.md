@@ -130,10 +130,4 @@ npm run start
 
 Florin Neagu is a software developer focused on modern web and mobile product development, with experience spanning frontend engineering, product iteration, and technical collaboration across business and engineering teams.
 
-## License
 
-This project is currently for personal portfolio use and is not distributed under a public license unless explicitly stated otherwise.
-
----
-
-Built with care for modern digital experiences and product-focused frontend engineering.
