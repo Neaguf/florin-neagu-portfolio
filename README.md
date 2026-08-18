@@ -1,6 +1,6 @@
 # Florin Neagu | Portfolio & Digital Product Developer
 
-A modern portfolio website built with Next.js to showcase experience, services, projects, and contact information for a full-stack and frontend-focused developer.
+A modern portfolio website built with Next.js to showcase experience, services, projects, and contact information for a full-stack developer.
 
 ## Overview
 
