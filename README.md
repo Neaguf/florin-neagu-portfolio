@@ -1,6 +1,6 @@
 # Florin Neagu | Portfolio & Digital Product Developer
 
-A modern portfolio website built with Next.js to showcase experience, services, projects, and contact information for a full-stack and frontend-focused developer.
+A modern portfolio website built with Next.js to showcase experience, services, projects, and contact information for a full-stack eveloper.
 
 ## Overview
 
@@ -93,6 +93,8 @@ Create a `.env.local` file in the root of the project and add the following:
 RESEND_API_KEY=your_resend_api_key
 RESEND_FROM_EMAIL=onboarding@resend.dev
 CONTACT_EMAIL=your_email@example.com
+# Optional dedicated secret for signing verification codes; RESEND_API_KEY is used as fallback.
+CONTACT_OTP_SECRET=use-a-long-random-secret
 ```
 
 4. Run the development server
@@ -129,11 +131,3 @@ npm run start
 ## About the Author
 
 Florin Neagu is a software developer focused on modern web and mobile product development, with experience spanning frontend engineering, product iteration, and technical collaboration across business and engineering teams.
-
-## License
-
-This project is currently for personal portfolio use and is not distributed under a public license unless explicitly stated otherwise.
-
----
-
-Built with care for modern digital experiences and product-focused frontend engineering.

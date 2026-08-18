@@ -45,6 +45,7 @@ type FormData = {
   phone: string;
   message: string;
   website?: string;
+  verificationCode?: string;
 };
 
 export function ContactForm() {
@@ -52,6 +53,8 @@ export function ContactForm() {
   const [sent, setSent] = useState(false);
   const [sendError, setSendError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [verificationToken, setVerificationToken] = useState("");
+  const [verificationStep, setVerificationStep] = useState(false);
 
   const schema = useMemo(
     () =>
@@ -84,11 +87,30 @@ export function ContactForm() {
             return letters >= 10 && !/^(lorem|ipsum|test|asdf|qwerty|dummy|bla|hello|hi|hey)$/i.test(cleaned);
           }, t.contactForm.errors.message),
         website: z.string().optional(),
+        verificationCode: z.string().optional(),
       }),
     [t]
   );
 
   const { register, handleSubmit, formState: { errors, isSubmitting }, reset } = useForm<FormData>({ resolver: zodResolver(schema) });
+
+  const requestVerificationCode = async (email: string) => {
+    setSendError(false);
+    setErrorMessage("");
+    const response = await fetch("/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ action: "request-code", email }),
+    });
+    const payload = await response.json().catch(() => ({}));
+    if (!response.ok || typeof payload.verificationToken !== "string") {
+      setSendError(true);
+      setErrorMessage(typeof payload.error === "string" ? payload.error : t.contactForm.sendError);
+      return;
+    }
+    setVerificationToken(payload.verificationToken);
+    setVerificationStep(true);
+  };
 
   const onSubmit = async (data: FormData) => {
     if (data.website) {
@@ -101,10 +123,21 @@ export function ContactForm() {
     setSendError(false);
     setErrorMessage("");
 
+    if (!verificationToken) {
+      await requestVerificationCode(data.email);
+      return;
+    }
+
+    if (!data.verificationCode?.trim()) {
+      setSendError(true);
+      setErrorMessage(t.contactForm.verifyFirst);
+      return;
+    }
+
     const response = await fetch("/api/contact", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
+      body: JSON.stringify({ ...data, verificationCode: data.verificationCode, verificationToken }),
     });
 
     if (!response.ok) {
@@ -119,31 +152,46 @@ export function ContactForm() {
     setSendError(false);
     setErrorMessage("");
     reset();
+    setVerificationToken("");
+    setVerificationStep(false);
   };
 
   return (
     <form className="contact-form simple" onSubmit={handleSubmit(onSubmit)} noValidate>
       <input type="text" tabIndex={-1} autoComplete="off" style={{ display: "none" }} {...register("website")} />
-      <label>
-        <span>{t.contactForm.nameLabel}</span>
-        <input {...register("name")} placeholder={t.contactForm.namePlaceholder} />
-        {errors.name && <em>{errors.name.message}</em>}
-      </label>
-      <label>
-        <span>{t.contactForm.emailLabel}</span>
-        <input {...register("email")} type="email" placeholder={t.contactForm.emailPlaceholder} />
-        {errors.email && <em>{errors.email.message}</em>}
-      </label>
-      <label>
-        <span>{t.contactForm.phoneLabel}</span>
-        <input {...register("phone")} type="tel" placeholder={t.contactForm.phonePlaceholder} autoComplete="tel" />
-        {errors.phone && <em>{errors.phone.message}</em>}
-      </label>
-      <label className="full">
-        <span>{t.contactForm.messageLabel}</span>
-        <textarea {...register("message")} placeholder={t.contactForm.messagePlaceholder} rows={4} />
-        {errors.message && <em>{errors.message.message}</em>}
-      </label>
+      {verificationStep ? (
+        <div className="verification-step full">
+          <p>{t.contactForm.codeSent}</p>
+          <label>
+            <span>{t.contactForm.codeLabel}</span>
+            <input {...register("verificationCode")} inputMode="numeric" autoComplete="one-time-code" placeholder={t.contactForm.codePlaceholder} maxLength={6} autoFocus />
+            {errors.verificationCode && <em>{errors.verificationCode.message}</em>}
+          </label>
+        </div>
+      ) : (
+        <>
+          <label>
+            <span>{t.contactForm.nameLabel}</span>
+            <input {...register("name")} placeholder={t.contactForm.namePlaceholder} />
+            {errors.name && <em>{errors.name.message}</em>}
+          </label>
+          <label>
+            <span>{t.contactForm.emailLabel}</span>
+            <input {...register("email")} type="email" placeholder={t.contactForm.emailPlaceholder} />
+            {errors.email && <em>{errors.email.message}</em>}
+          </label>
+          <label>
+            <span>{t.contactForm.phoneLabel}</span>
+            <input {...register("phone")} type="tel" placeholder={t.contactForm.phonePlaceholder} autoComplete="tel" />
+            {errors.phone && <em>{errors.phone.message}</em>}
+          </label>
+          <label className="full">
+            <span>{t.contactForm.messageLabel}</span>
+            <textarea {...register("message")} placeholder={t.contactForm.messagePlaceholder} rows={4} />
+            {errors.message && <em>{errors.message.message}</em>}
+          </label>
+        </>
+      )}
 
       <div className="form-footer">
         <p className={sendError ? "form-status form-status-error" : "form-status"}>
@@ -158,7 +206,7 @@ export function ContactForm() {
           )}
         </p>
         <button className="button button-dark" type="submit" disabled={isSubmitting}>
-          {isSubmitting ? t.contactForm.submitting : t.contactForm.submit}
+          {isSubmitting ? t.contactForm.submitting : verificationStep ? t.contactForm.codeLabel : t.contactForm.submit}
           <ArrowUpRight size={17} />
         </button>
       </div>

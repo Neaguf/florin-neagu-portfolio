@@ -74,6 +74,11 @@ export interface Dictionary {
     namePlaceholder: string;
     emailLabel: string;
     emailPlaceholder: string;
+    sendCode: string;
+    codeSent: string;
+    codeLabel: string;
+    codePlaceholder: string;
+    verifyFirst: string;
     phoneLabel: string;
     phonePlaceholder: string;
     messageLabel: string;
@@ -281,6 +286,11 @@ const ro: Dictionary = {
     namePlaceholder: "Numele tău",
     emailLabel: "Email",
     emailPlaceholder: "tu@companie.ro",
+    sendCode: "Trimite cod",
+    codeSent: "Cod trimis",
+    codeLabel: "Cod de verificare",
+    codePlaceholder: "Introdu codul primit pe email",
+    verifyFirst: "Solicită și introdu codul primit pe email înainte de trimitere.",
     phoneLabel: "Telefon",
     phonePlaceholder: "+40 712 345 678",
     messageLabel: "Spune-mi despre proiect",
@@ -543,6 +553,11 @@ const en: Dictionary = {
     namePlaceholder: "Your name",
     emailLabel: "Email",
     emailPlaceholder: "you@company.com",
+    sendCode: "Send code",
+    codeSent: "Code sent",
+    codeLabel: "Verification code",
+    codePlaceholder: "Enter the code from your email",
+    verifyFirst: "Request and enter the code sent to your email before submitting.",
     phoneLabel: "Phone",
     phonePlaceholder: "+1 555 123 4567",
     messageLabel: "Tell me about the project",
@@ -807,6 +822,11 @@ const fr: Dictionary = {
     namePlaceholder: "Votre nom",
     emailLabel: "Email",
     emailPlaceholder: "toi@entreprise.com",
+    sendCode: "Envoyer le code",
+    codeSent: "Code envoyé",
+    codeLabel: "Code de vérification",
+    codePlaceholder: "Saisissez le code reçu par email",
+    verifyFirst: "Demandez et saisissez le code envoyé à votre email avant l'envoi.",
     phoneLabel: "Téléphone",
     phonePlaceholder: "+33 6 12 34 56 78",
     messageLabel: "Parlez-moi du projet",
@@ -1069,6 +1089,11 @@ const de: Dictionary = {
     namePlaceholder: "Dein Name",
     emailLabel: "Email",
     emailPlaceholder: "du@firma.de",
+    sendCode: "Code senden",
+    codeSent: "Code gesendet",
+    codeLabel: "Bestätigungscode",
+    codePlaceholder: "Code aus deiner E-Mail eingeben",
+    verifyFirst: "Fordere den Code an und gib ihn vor dem Absenden ein.",
     phoneLabel: "Telefon",
     phonePlaceholder: "+49 170 1234567",
     messageLabel: "Erzähl mir von deinem Projekt",
@@ -1328,6 +1353,11 @@ const es: Dictionary = {
     namePlaceholder: "Tu nombre",
     emailLabel: "Email",
     emailPlaceholder: "tu@empresa.com",
+    sendCode: "Enviar código",
+    codeSent: "Código enviado",
+    codeLabel: "Código de verificación",
+    codePlaceholder: "Introduce el código recibido por email",
+    verifyFirst: "Solicita e introduce el código enviado a tu email antes de enviar.",
     phoneLabel: "Teléfono",
     phonePlaceholder: "+34 612 345 678",
     messageLabel: "Cuéntame sobre el proyecto",
@@ -1586,6 +1616,11 @@ const it: Dictionary = {
     namePlaceholder: "Il tuo nome",
     emailLabel: "Email",
     emailPlaceholder: "tu@azienda.it",
+    sendCode: "Invia codice",
+    codeSent: "Codice inviato",
+    codeLabel: "Codice di verifica",
+    codePlaceholder: "Inserisci il codice ricevuto via email",
+    verifyFirst: "Richiedi e inserisci il codice inviato alla tua email prima dell'invio.",
     phoneLabel: "Telefono",
     phonePlaceholder: "+39 333 1234567",
     messageLabel: "Raccontami del progetto",
