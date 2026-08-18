@@ -419,11 +419,11 @@ const en: Dictionary = {
     titleLine1: "Who's behind the",
     titleEm: "screen?",
     summary:
-      "Full stack developer with 4+ years of experience building modern, scalable, and user-focused web and mobile applications.",
+      "Full-stack developer with experience building modern, scalable, and user-focused web and mobile applications.",
     paragraph2:
-      "I've also worked as an IT Project Manager, which taught me to look at projects beyond the screen: people, priorities, deadlines, and the final result.",
+      "My experience includes both technical development and project coordination, which helps me build solutions that are efficient for the business, the user, and the team.",
     paragraph3:
-      "I work carefully, communicate often, and keep things clear from the first conversation to launch.",
+      "I focus on clarity, collaboration, and delivering quality products from the first idea to launch.",
     quoteLead: "One partner.",
     quoteMiddle: "Everything you need. No shortcuts. No compromises.",
     quoteHighlight: "Just results.",
@@ -681,11 +681,11 @@ const fr: Dictionary = {
     titleLine1: "Qui se cache derrière",
     titleEm: "l'écran ?",
     summary:
-      "Développeur full stack avec plus de 4 ans d'expérience dans la création d'applications web et mobiles modernes, évolutives et centrées sur l'utilisateur.",
+      "Développeur full stack avec une expérience dans la création d'applications web et mobiles modernes, évolutives et centrées sur l'utilisateur.",
     paragraph2:
-      "J'ai aussi travaillé comme IT Project Manager, ce qui m'a appris à voir les projets au-delà de l'écran : les personnes, les priorités, les délais et le résultat final.",
+      "Mon expérience couvre à la fois le développement technique et la coordination de projets, ce qui me permet de créer des solutions efficaces pour l'entreprise, l'utilisateur et l'équipe.",
     paragraph3:
-      "Je travaille avec soin, je communique souvent et je garde les choses claires depuis la première conversation jusqu'au lancement.",
+      "Je mise sur la clarté, la collaboration et la livraison de produits de qualité, de la première idée au lancement.",
     quoteLead: "Un seul partenaire.",
     quoteMiddle: "Tout ce dont vous avez besoin. Sans raccourcis. Sans compromis.",
     quoteHighlight: "Juste des résultats.",
@@ -945,11 +945,11 @@ const de: Dictionary = {
     titleLine1: "Wer steckt hinter",
     titleEm: "dem Bildschirm?",
     summary:
-      "Full-Stack-Entwickler mit über 4 Jahren Erfahrung im Aufbau moderner, skalierbarer und nutzerorientierter Web- und Mobile-Anwendungen.",
+      "Full-Stack-Entwickler mit Erfahrung im Aufbau moderner, skalierbarer und nutzerorientierter Web- und Mobile-Anwendungen.",
     paragraph2:
-      "Ich habe außerdem als IT-Projektmanager gearbeitet, was mich gelehrt hat, Projekte über den Bildschirm hinaus zu betrachten: Menschen, Prioritäten, Fristen und das Endergebnis.",
+      "Meine Erfahrung umfasst sowohl die technische Entwicklung als auch die Projektkoordination, wodurch ich Lösungen schaffen kann, die für Unternehmen, Nutzer und Team effektiv sind.",
     paragraph3:
-      "Ich arbeite sorgfältig, kommuniziere häufig und halte alles klar und verständlich – vom ersten Gespräch bis zum Launch.",
+      "Ich fokussiere mich auf Klarheit, Zusammenarbeit und die Lieferung hochwertiger Produkte – von der ersten Idee bis zum Launch.",
     quoteLead: "Ein Partner.",
     quoteMiddle: "Alles, was du brauchst. Keine Abkürzungen. Keine Kompromisse.",
     quoteHighlight: "Nur Ergebnisse.",
@@ -1207,11 +1207,11 @@ const es: Dictionary = {
     titleLine1: "Quién está detrás",
     titleEm: "de la pantalla?",
     summary:
-      "Desarrollador full stack con más de 4 años de experiencia creando aplicaciones web y móviles modernas, escalables y centradas en el usuario.",
+      "Desarrollador full stack con experiencia en la creación de aplicaciones web y móviles modernas, escalables y centradas en el usuario.",
     paragraph2:
-      "También he trabajado como IT Project Manager, lo que me enseñó a ver los proyectos más allá de la pantalla: personas, prioridades, plazos y el resultado final.",
+      "Mi experiencia incluye tanto el desarrollo técnico como la coordinación de proyectos, lo que me ayuda a crear soluciones eficientes para el negocio, el usuario y el equipo.",
     paragraph3:
-      "Trabajo con cuidado, me comunico a menudo y mantengo las cosas claras desde la primera conversación hasta el lanzamiento.",
+      "Me centro en la claridad, la colaboración y la entrega de productos de calidad, desde la primera idea hasta el lanzamiento.",
     quoteLead: "Un solo socio.",
     quoteMiddle: "Todo lo que necesitas. Sin atajos. Sin compromisos.",
     quoteHighlight: "Solo resultados.",
@@ -1466,11 +1466,11 @@ const it: Dictionary = {
     titleLine1: "Chi c'è dietro",
     titleEm: "lo schermo?",
     summary:
-      "Sviluppatore full stack con oltre 4 anni di esperienza nella creazione di applicazioni web e mobili moderne, scalabili e incentrate sull'utente.",
+      "Sviluppatore full stack con esperienza nella creazione di applicazioni web e mobili moderne, scalabili e incentrate sull'utente.",
     paragraph2:
-      "Ho anche lavorato come IT Project Manager, il che mi ha insegnato a guardare i progetti oltre lo schermo: persone, priorità, scadenze e il risultato finale.",
+      "La mia esperienza comprende sia lo sviluppo tecnico sia la coordinazione dei progetti, e mi aiuta a creare soluzioni efficienti per l'azienda, l'utente e il team.",
     paragraph3:
-      "Lavoro con attenzione, comunico spesso e mantengo tutto chiaro dalla prima conversazione fino al lancio.",
+      "Mi concentro sulla chiarezza, sulla collaborazione e sulla consegna di prodotti di qualità, dalla prima idea al lancio.",
     quoteLead: "Un solo partner.",
     quoteMiddle: "Tutto ciò di cui hai bisogno. Senza scorciatoie. Senza compromessi.",
     quoteHighlight: "Solo risultati.",

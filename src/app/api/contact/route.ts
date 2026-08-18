@@ -1,7 +1,48 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
 
+const MAX_SUBMISSIONS_PER_IP = 3;
+const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
+const ipRateLimit = new Map<string, { count: number; windowStart: number }>();
+
 const blockedNamePattern = /^(test|dummy|guest|user|sample|example|anonim|nume|name)$/i;
+
+const getClientIp = (request: Request) => {
+  const forwardedFor = request.headers.get("x-forwarded-for");
+  if (forwardedFor) {
+    return forwardedFor.split(",")[0].trim();
+  }
+
+  const realIp = request.headers.get("x-real-ip");
+  if (realIp) {
+    return realIp.trim();
+  }
+
+  return "unknown";
+};
+
+const isRateLimited = (request: Request) => {
+  const ip = getClientIp(request);
+  const now = Date.now();
+  const current = ipRateLimit.get(ip);
+
+  if (!current) {
+    ipRateLimit.set(ip, { count: 1, windowStart: now });
+    return false;
+  }
+
+  if (now - current.windowStart > RATE_LIMIT_WINDOW_MS) {
+    ipRateLimit.set(ip, { count: 1, windowStart: now });
+    return false;
+  }
+
+  if (current.count >= MAX_SUBMISSIONS_PER_IP) {
+    return true;
+  }
+
+  ipRateLimit.set(ip, { count: current.count + 1, windowStart: current.windowStart });
+  return false;
+};
 
 const isValidInternationalPhone = (value: string) => {
   const normalized = value.replace(/\s+/g, "").replace(/-/g, "");
@@ -67,6 +108,15 @@ const contactSchema = z.object({
 
 export async function POST(request: Request) {
   try {
+    if (isRateLimited(request)) {
+      return NextResponse.json(
+        {
+          error: "Ai trimis deja 3 requesturi/formulare. Te rugăm să aștepți încă 10 minute înainte de a mai trimite un mesaj.",
+        },
+        { status: 429 }
+      );
+    }
+
     const data = contactSchema.parse(await request.json());
 
     if (data.website && data.website.length > 0) {

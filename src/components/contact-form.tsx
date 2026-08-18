@@ -51,6 +51,7 @@ export function ContactForm() {
   const { t } = useLanguage();
   const [sent, setSent] = useState(false);
   const [sendError, setSendError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const schema = useMemo(
     () =>
@@ -92,11 +93,13 @@ export function ContactForm() {
   const onSubmit = async (data: FormData) => {
     if (data.website) {
       setSendError(true);
+      setErrorMessage("Spam check failed.");
       return;
     }
 
     setSent(false);
     setSendError(false);
+    setErrorMessage("");
 
     const response = await fetch("/api/contact", {
       method: "POST",
@@ -105,11 +108,16 @@ export function ContactForm() {
     });
 
     if (!response.ok) {
+      const payload = await response.json().catch(() => ({}));
+      const message = typeof payload.error === "string" ? payload.error : t.contactForm.sendError;
       setSendError(true);
+      setErrorMessage(message);
       return;
     }
 
     setSent(true);
+    setSendError(false);
+    setErrorMessage("");
     reset();
   };
 
@@ -138,13 +146,13 @@ export function ContactForm() {
       </label>
 
       <div className="form-footer">
-        <p>
+        <p className={sendError ? "form-status form-status-error" : "form-status"}>
           {sent ? (
             <>
               <Check size={16} /> {t.contactForm.sentMessage}
             </>
           ) : sendError ? (
-            t.contactForm.sendError
+            errorMessage || t.contactForm.sendError
           ) : (
             t.contactForm.readyMessage
           )}
