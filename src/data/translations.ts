@@ -109,6 +109,12 @@ export interface Dictionary {
     ratingLabel: string;
     projectsCompletedLabel: string;
   };
+  pricing: {
+    eyebrow: string;
+    titleLine1: string;
+    titleEm: string;
+    packages: { title: string; price: string; description: string; features: string[] }[];
+  };
 }
 
 const ro: Dictionary = {
@@ -116,6 +122,7 @@ const ro: Dictionary = {
     items: [
       { id: "top", label: "Start" },
       { id: "story", label: "Poveste" },
+      { id: "pricing", label: "Prețuri" },
       { id: "contact", label: "Contact" },
     ],
     cta: "Începe un proiect",
@@ -325,6 +332,52 @@ const ro: Dictionary = {
     ratingLabel: "Notă",
     projectsCompletedLabel: "Proiecte finalizate",
   },
+  pricing: {
+    eyebrow: "Pachete și prețuri",
+    titleLine1: "Site-uri profesiionale",
+    titleEm: "personalizate pentru tine, de la 2.000 de lei.",
+    packages: [
+      {
+        title: "Website Profesional",
+        price: "Preț personalizat",
+        description: "Discutăm detaliile și nevoile tale pentru a stabili investiția potrivită.",
+        features: [
+          "Design modern și responsive",
+          "4-6 pagini",
+          "Optimizare SEO basic",
+          "Contact form functional",
+          "Deploy pe hosting",
+          "3 luni suport gratuit",
+        ],
+      },
+      {
+        title: "Web App Interactiv",
+        price: "Preț personalizat",
+        description: "Discutăm detaliile și nevoile tale pentru a stabili investiția potrivită.",
+        features: [
+          "Design custom",
+          "Pagini nelimitate",
+          "Autentificare și conturi",
+          "Bază de date",
+          "Integrări cu API-uri",
+          "6 luni suport inclus",
+        ],
+      },
+      {
+        title: "Aplicație Mobilă",
+        price: "Preț personalizat",
+        description: "Discutăm detaliile și nevoile tale pentru a stabili investiția potrivită.",
+        features: [
+          "Aplicație cross-platform",
+          "Backend complet",
+          "Push notifications",
+          "Offline support",
+          "Cloud storage",
+          "1 an suport și update-uri",
+        ],
+      },
+    ],
+  },
 };
 
 const en: Dictionary = {
@@ -332,6 +385,7 @@ const en: Dictionary = {
     items: [
       { id: "top", label: "Start" },
       { id: "story", label: "Story" },
+      { id: "pricing", label: "Pricing" },
       { id: "contact", label: "Contact" },
     ],
     cta: "Start a project",
@@ -537,13 +591,60 @@ const en: Dictionary = {
     ratingLabel: "Rating",
     projectsCompletedLabel: "Projects completed",
   },
+  pricing: {
+    eyebrow: "Packages and pricing",
+    titleLine1: "Professional solutions",
+    titleEm: "tailored for you.",
+    packages: [
+      {
+        title: "Professional Website",
+        price: "Custom pricing",
+        description: "Let's discuss your needs to find the right investment for you.",
+        features: [
+          "Modern responsive design",
+          "4-6 pages",
+          "Basic SEO optimization",
+          "Functional contact form",
+          "Hosting deployment",
+          "3 months free support",
+        ],
+      },
+      {
+        title: "Interactive Web App",
+        price: "Custom pricing",
+        description: "Let's discuss your needs to find the right investment for you.",
+        features: [
+          "Custom design",
+          "Unlimited pages",
+          "User authentication",
+          "Database included",
+          "API integrations",
+          "6 months support included",
+        ],
+      },
+      {
+        title: "Mobile Application",
+        price: "Custom pricing",
+        description: "Let's discuss your needs to find the right investment for you.",
+        features: [
+          "Cross-platform app",
+          "Full backend",
+          "Push notifications",
+          "Offline support",
+          "Cloud storage",
+          "1 year support and updates",
+        ],
+      },
+    ],
+  },
 };
 
 const fr: Dictionary = {
   nav: {
     items: [
-      { id: "top", label: "Start" },
+      { id: "top", label: "Accueil" },
       { id: "story", label: "Histoire" },
+      { id: "pricing", label: "Tarifs" },
       { id: "contact", label: "Contact" },
     ],
     cta: "Démarrer un projet",
@@ -751,6 +852,52 @@ const fr: Dictionary = {
     ratingLabel: "Note",
     projectsCompletedLabel: "Projets terminés",
   },
+  pricing: {
+    eyebrow: "Forfaits et tarification",
+    titleLine1: "Solutions professionnelles",
+    titleEm: "adaptées à tes besoins.",
+    packages: [
+      {
+        title: "Site Web Professionnel",
+        price: "Prix personnalisé",
+        description: "Discutons tes besoins pour trouver l'investissement qui te convient.",
+        features: [
+          "Design moderne et responsive",
+          "4-6 pages",
+          "Optimisation SEO basique",
+          "Formulaire de contact fonctionnel",
+          "Déploiement sur hébergement",
+          "3 mois de support gratuit",
+        ],
+      },
+      {
+        title: "Application Web Interactive",
+        price: "Prix personnalisé",
+        description: "Discutons tes besoins pour trouver l'investissement qui te convient.",
+        features: [
+          "Design personnalisé",
+          "Pages illimitées",
+          "Authentification utilisateur",
+          "Base de données incluse",
+          "Intégrations API",
+          "6 mois de support inclus",
+        ],
+      },
+      {
+        title: "Application Mobile",
+        price: "Prix personnalisé",
+        description: "Discutons tes besoins pour trouver l'investissement qui te convient.",
+        features: [
+          "Application multi-plateforme",
+          "Backend complet",
+          "Notifications push",
+          "Support hors ligne",
+          "Stockage cloud",
+          "1 an de support et mises à jour",
+        ],
+      },
+    ],
+  },
 };
 
 const de: Dictionary = {
@@ -758,7 +905,8 @@ const de: Dictionary = {
     items: [
       { id: "top", label: "Start" },
       { id: "story", label: "Geschichte" },
-      { id: "contact", label: "Contact" },
+      { id: "pricing", label: "Preise" },
+      { id: "contact", label: "Kontakt" },
     ],
     cta: "Projekt starten",
     ariaLabel: "Hauptnavigation",
@@ -963,14 +1111,61 @@ const de: Dictionary = {
     ratingLabel: "Bewertung",
     projectsCompletedLabel: "Abgeschlossene Projekte",
   },
+  pricing: {
+    eyebrow: "Pakete und Preise",
+    titleLine1: "Professionelle Lösungen",
+    titleEm: "maßgeschneidert für deine Bedürfnisse.",
+    packages: [
+      {
+        title: "Professionelle Website",
+        price: "Individueller Preis",
+        description: "Lass uns deine Bedürfnisse besprechen, um die richtige Investition zu finden.",
+        features: [
+          "Modernes responsives Design",
+          "4-6 Seiten",
+          "Basis-SEO-Optimierung",
+          "Funktionales Kontaktformular",
+          "Hosting-Deployment",
+          "3 Monate kostenlos Support",
+        ],
+      },
+      {
+        title: "Interaktive Web-App",
+        price: "Individueller Preis",
+        description: "Lass uns deine Bedürfnisse besprechen, um die richtige Investition zu finden.",
+        features: [
+          "Custom Design",
+          "Unbegrenzte Seiten",
+          "Benutzerauthentifizierung",
+          "Datenbank enthalten",
+          "API-Integrationen",
+          "6 Monate Support inklusive",
+        ],
+      },
+      {
+        title: "Mobile App",
+        price: "Individueller Preis",
+        description: "Lass uns deine Bedürfnisse besprechen, um die richtige Investition zu finden.",
+        features: [
+          "Cross-Platform App",
+          "Vollständiges Backend",
+          "Push-Benachrichtigungen",
+          "Offline-Unterstützung",
+          "Cloud-Speicher",
+          "1 Jahr Support und Updates",
+        ],
+      },
+    ],
+  },
 };
 
 const es: Dictionary = {
   nav: {
     items: [
-      { id: "top", label: "Start" },
+      { id: "top", label: "Inicio" },
       { id: "story", label: "Historia" },
-      { id: "contact", label: "Contact" },
+      { id: "pricing", label: "Precios" },
+      { id: "contact", label: "Contacto" },
     ],
     cta: "Iniciar un proyecto",
     ariaLabel: "Navegación principal",
@@ -1172,14 +1367,61 @@ const es: Dictionary = {
     ratingLabel: "Valoración",
     projectsCompletedLabel: "Proyectos completados",
   },
+  pricing: {
+    eyebrow: "Paquetes y precios",
+    titleLine1: "Soluciones profesionales",
+    titleEm: "personalizadas para ti.",
+    packages: [
+      {
+        title: "Sitio Web Profesional",
+        price: "Precio personalizado",
+        description: "Hablemos de tus necesidades para encontrar la inversión adecuada.",
+        features: [
+          "Diseño moderno y responsive",
+          "4-6 páginas",
+          "Optimización SEO básica",
+          "Formulario de contacto funcional",
+          "Despliegue en hosting",
+          "3 meses de soporte gratuito",
+        ],
+      },
+      {
+        title: "Aplicación Web Interactiva",
+        price: "Precio personalizado",
+        description: "Hablemos de tus necesidades para encontrar la inversión adecuada.",
+        features: [
+          "Diseño personalizado",
+          "Páginas ilimitadas",
+          "Autenticación de usuarios",
+          "Base de datos incluida",
+          "Integraciones de API",
+          "6 meses de soporte incluido",
+        ],
+      },
+      {
+        title: "Aplicación Móvil",
+        price: "Precio personalizado",
+        description: "Hablemos de tus necesidades para encontrar la inversión adecuada.",
+        features: [
+          "App multiplataforma",
+          "Backend completo",
+          "Notificaciones push",
+          "Soporte sin conexión",
+          "Almacenamiento en la nube",
+          "1 año de soporte y actualizaciones",
+        ],
+      },
+    ],
+  },
 };
 
 const it: Dictionary = {
   nav: {
     items: [
-      { id: "top", label: "Start" },
+      { id: "top", label: "Inizio" },
       { id: "story", label: "Storia" },
-      { id: "contact", label: "Contact" },
+      { id: "pricing", label: "Prezzi" },
+      { id: "contact", label: "Contatti" },
     ],
     cta: "Inizia un progetto",
     ariaLabel: "Navigazione principale",
@@ -1379,6 +1621,52 @@ const it: Dictionary = {
     downloadsLabel: "Download",
     ratingLabel: "Valutazione",
     projectsCompletedLabel: "Progetti completati",
+  },
+  pricing: {
+    eyebrow: "Pacchetti e prezzi",
+    titleLine1: "Soluzioni professionali",
+    titleEm: "personalizzate per te.",
+    packages: [
+      {
+        title: "Sito Web Professionale",
+        price: "Prezzo personalizzato",
+        description: "Parliamo delle tue esigenze per trovare l'investimento giusto per te.",
+        features: [
+          "Design moderno e responsive",
+          "4-6 pagine",
+          "Ottimizzazione SEO di base",
+          "Modulo di contatto funzionante",
+          "Deploy su hosting",
+          "3 mesi di supporto gratuito",
+        ],
+      },
+      {
+        title: "Applicazione Web Interattiva",
+        price: "Prezzo personalizzato",
+        description: "Parliamo delle tue esigenze per trovare l'investimento giusto per te.",
+        features: [
+          "Design personalizzato",
+          "Pagine illimitate",
+          "Autenticazione utente",
+          "Database incluso",
+          "Integrazioni API",
+          "6 mesi di supporto incluso",
+        ],
+      },
+      {
+        title: "Applicazione Mobile",
+        price: "Prezzo personalizzato",
+        description: "Parliamo delle tue esigenze per trovare l'investimento giusto per te.",
+        features: [
+          "App multipiattaforma",
+          "Backend completo",
+          "Notifiche push",
+          "Supporto offline",
+          "Archiviazione cloud",
+          "1 anno di supporto e aggiornamenti",
+        ],
+      },
+    ],
   },
 };
 

@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import {
   ArrowDown,
   ArrowRight,
@@ -21,6 +22,7 @@ import {
   Sparkles,
   Swords,
   Zap,
+  Check,
 } from "lucide-react";
 import { ContactForm } from "@/components/contact-form";
 import { HeroVisual } from "@/components/hero-visual";
@@ -53,7 +55,14 @@ export default function Home() {
       <section className="game-hero" id="top">
         <nav className="game-nav container" aria-label={t.nav.ariaLabel}>
           <a className="game-logo" href="#top">
-            FLORIN<span>_</span>NEAGU
+            <Image
+              src="/images/Logo.webp"
+              alt="Florin Neagu Logo"
+              width={90}
+              height={45}
+              priority
+              style={{ height: "45px", width: "auto" }}
+            />
           </a>
           <div className="nav-links">
             {t.nav.items.map((item) => (
@@ -209,6 +218,40 @@ export default function Home() {
           </div>
         </div>
       </section>
+      <section className="pricing-section" id="pricing">
+        <div className="container">
+          <Reveal>
+            <p className="pixel-label">{t.pricing.eyebrow}</p>
+            <h2>
+              {t.pricing.titleLine1}
+              <br />
+              <em>{t.pricing.titleEm}</em>
+            </h2>
+          </Reveal>
+          <div className="pricing-grid">
+            {t.pricing.packages.map((pkg, index) => (
+              <Reveal key={pkg.title} delay={index * 0.08} className="pricing-card">
+                <div className="pricing-header">
+                  <h3>{pkg.title}</h3>
+                  <div className="pricing-price">{pkg.price}</div>
+                  <p className="pricing-description">{pkg.description}</p>
+                </div>
+                <ul className="pricing-features">
+                  {pkg.features.map((feature) => (
+                    <li key={feature}>
+                      <Check size={16} />
+                      <span>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+                <a href="#contact" className="game-button pricing-cta">
+                  {t.hero.ctaPrimary}
+                </a>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
       <section className="contact game-contact boss-contact" id="contact">
         <div className="container">
           <Reveal>
@@ -260,7 +303,13 @@ export default function Home() {
       <footer>
         <div className="container">
           <a className="game-logo" href="#top">
-            FLORIN<span>_</span>NEAGU
+            <Image
+              src="/images/Logo.webp"
+              alt="Florin Neagu Logo"
+              width={75}
+              height={35}
+              style={{ height: "35px", width: "auto" }}
+            />
           </a>
           <p>
             © {new Date().getFullYear()} {profile.name}
